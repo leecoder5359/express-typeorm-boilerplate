@@ -1,0 +1,11 @@
+{
+  "name": "express-typeorm-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:leecoder5359/express-typeorm-boilerplate.git",
+  "author": "이호준 <leecoder5359@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
