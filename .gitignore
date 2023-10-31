@@ -15,7 +15,7 @@ node_modules/
 
 # dotenv environment variable files
 .env
-.env.development.local
+# .env.development.local #로컬 테스트 용으로 그냥 올라가도록 설정
 .env.test.local
 .env.production.local
 .env.local

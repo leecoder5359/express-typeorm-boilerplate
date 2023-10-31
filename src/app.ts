@@ -2,6 +2,7 @@ import express from "express";
 import {NODE_ENV, PORT} from "./config";
 import {Routes} from "./interfaces/routes.interface";
 import {logger} from "./utils/logger";
+import DatabaseConnection from "./database/DatabaseConnection";
 
 export default class App {
     public app: express.Application;
@@ -29,7 +30,7 @@ export default class App {
     }
 
     private connectToDatabase() {
-
+        DatabaseConnection.initialize('pg');
     }
 
     private initializeMiddlewares() {
