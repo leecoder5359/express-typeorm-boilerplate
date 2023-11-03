@@ -5,7 +5,7 @@ import { Strategy as KakaoStrategy, VerifyFunction } from "passport-kakao";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_PASSWORD, KAKAO_API_KEY } from "./index";
 import { AuthService, authService } from "../services/auth.service";
 
-export class Passport {
+export class PassportConfig {
     private passport;
     private authService: AuthService;
 
@@ -18,7 +18,7 @@ export class Passport {
     }
 
     static init() {
-        return new Passport();
+        return new PassportConfig();
     }
 
     private initializeLocalStrategies() {

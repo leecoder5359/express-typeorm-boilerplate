@@ -4,7 +4,7 @@ import {Routes} from "./interfaces/routes.interface";
 import {logger} from "./utils/logger";
 import {connect, AppDataSource} from "./database/database";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
-import { Passport } from "./config/Passport";
+import { PassportConfig } from "./config/passport.config";
 import passport from "passport";
 import cookieSession from "cookie-session";
 import path from "path";
@@ -50,7 +50,7 @@ export default class App {
         this.app.use(passport.session());
         this.app.use(passport.initialize());
         this.app.use(regenerate);
-        Passport.init();
+        PassportConfig.init();
     }
 
     private initializeRoutes(routes: Routes[]) {

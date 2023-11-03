@@ -1,6 +1,6 @@
 import passport, { Strategy } from "passport";
 import { NextFunction, Request, Response } from "express";
-import { MassageException } from "../exceptions/MassageException";
+import { MassageException } from "../exceptions/massage.exception";
 
 export class AuthController {
 

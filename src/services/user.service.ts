@@ -1,7 +1,7 @@
 import { CreateUserDto, UpdateUserDto } from "../dtos/users.dto";
 import { User } from "../entity/user.entity";
 import { ObjectLiteral, Repository } from "typeorm";
-import { MassageException } from "../exceptions/MassageException";
+import { MassageException } from "../exceptions/massage.exception";
 import { AppDataSource } from "../database/database";
 
 export class UserService {
