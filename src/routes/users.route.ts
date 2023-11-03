@@ -1,13 +1,13 @@
-import {Router} from 'express';
-import {UserController} from "../controllers/users.controller";
-import {Routes} from '../interfaces/routes.interface';
+import { Router } from "express";
+import { userController, UserController } from "../controllers/users.controller";
+import { Routes } from "../interfaces/routes.interface";
 import { ValidationMiddleware } from "../middlewares/validation.middleware";
 import { CreateUserDto, UpdateUserDto } from "../dtos/users.dto";
 
 export class UserRoute implements Routes {
-    public path = '/users';
+    public path = "/users";
     public router = Router();
-    private userController: UserController = new UserController();
+    private userController: UserController = userController;
 
     constructor() {
         this.initializeRoutes();

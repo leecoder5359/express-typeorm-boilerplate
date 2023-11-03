@@ -5,6 +5,7 @@ import { HttpException } from "../exceptions/HttpException";
 
 export const ValidationMiddleware = (type: any, skipMissingProperties = false, whitelist = false, forbidNonWhitelisted = false) => {
     return async (req: Request, res: Response, next: NextFunction) => {
+        console.log('body', req.body);
         const dto = plainToInstance(type, req.body);
 
         try {

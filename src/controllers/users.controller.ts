@@ -1,12 +1,12 @@
-import { UserService } from "../services/user.service";
+import { userService, UserService } from "../services/user.service";
 import { Request, Response, NextFunction } from "express";
 import { CreateUserDto, UpdateUserDto } from "../dtos/users.dto";
 import { ApiResponse } from "../libs/ApiResponse";
 
 export class UserController {
-    private userService: UserService = new UserService();
+    private userService: UserService = userService;
 
-    getAllUsers = async (req: Request, res: Response, next: NextFunction)=> {
+    getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const users = await this.userService.findAllUsers();
 
@@ -16,7 +16,7 @@ export class UserController {
         }
     }
 
-    getUserById = async (req: Request, res: Response, next: NextFunction)=> {
+    getUserById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = Number(req.params.id);
             const user = await this.userService.findUserById(id);
@@ -27,7 +27,7 @@ export class UserController {
         }
     }
 
-    createUser = async (req: Request, res: Response, next: NextFunction)=> {
+    createUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const createUser: CreateUserDto = req.body;
             const users = await this.userService.createUser(createUser);
@@ -38,7 +38,7 @@ export class UserController {
         }
     }
 
-    updateUserById = async (req: Request, res: Response, next: NextFunction)=> {
+    updateUserById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = Number(req.params.id);
             const updateUser: UpdateUserDto = req.body;
@@ -51,7 +51,7 @@ export class UserController {
         }
     }
 
-    removeUserById = async (req: Request, res: Response, next: NextFunction)=> {
+    removeUserById = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = Number(req.params.id);
             const result = await this.userService.deleteUserById(id);
@@ -63,3 +63,4 @@ export class UserController {
     }
 }
 
+export const userController = new UserController();

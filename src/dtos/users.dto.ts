@@ -1,35 +1,49 @@
-import { IsString, IsNotEmpty, MaxLength, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, MaxLength, IsNumber, IsOptional } from "class-validator";
+import { User } from "../entity/user.entity";
 
 export class CreateUserDto {
     @IsString()
-    @IsNotEmpty({message: "firstName은 필수값 입니다."})
+    @IsNotEmpty({message: "name은 필수값 입니다."})
     @MaxLength(50)
-    public firstName: string;
+    userName: string;
 
     @IsString()
-    @IsNotEmpty({message: "lastName은 필수값 입니다."})
+    @IsNotEmpty({message: "email은 필수값 입니다."})
     @MaxLength(50)
-    lastName: string;
+    email: string;
 
-    @IsNumber()
-    @IsNotEmpty({message: "age는 필수값 입니다."})
+    @IsString()
+    @IsNotEmpty({message: "password은 필수값 입니다."})
     @MaxLength(50)
-    age: number;
+    password: string;
+
+    toUserEntity() {
+        return User.from(
+            this.userName,
+            this.email,
+            this.password,
+        )
+    }
 }
 
 export class UpdateUserDto {
     @IsString()
-    @IsNotEmpty({message: "firstName은 필수값 입니다."})
     @MaxLength(50)
-    public firstName: string;
+    @IsOptional()
+    userName: string;
 
     @IsString()
-    @IsNotEmpty({message: "lastName은 필수값 입니다."})
     @MaxLength(50)
-    lastName: string;
+    @IsOptional()
+    email: string;
 
-    @IsNumber()
-    @IsNotEmpty({message: "age는 필수값 입니다."})
+    @IsString()
     @MaxLength(50)
-    age: number;
+    @IsOptional()
+    kakaoId: string;
+
+    @IsString()
+    @MaxLength(50)
+    @IsOptional()
+    googleId: string;
 }

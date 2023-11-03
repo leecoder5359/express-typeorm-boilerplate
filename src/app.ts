@@ -1,9 +1,14 @@
 import express from "express";
-import {NODE_ENV, PORT} from "./config";
+import { COOKIE_ENCRYPTION_KEY, NODE_ENV, PORT } from "./config";
 import {Routes} from "./interfaces/routes.interface";
 import {logger} from "./utils/logger";
 import {connect, AppDataSource} from "./database/database";
 import { ErrorMiddleware } from "./middlewares/error.middleware";
+import { Passport } from "./config/Passport";
+import passport from "passport";
+import cookieSession from "cookie-session";
+import path from "path";
+import { regenerate } from "./middlewares/regenerate.middleware";
 
 export default class App {
     public app: express.Application;
@@ -18,6 +23,7 @@ export default class App {
         this.connectToDatabase();
         this.initializeMiddlewares();
         this.initializeRoutes(routes);
+        this.initializeView();
         this.initializeErrorHandling();
     }
 
@@ -36,12 +42,26 @@ export default class App {
 
     private initializeMiddlewares() {
         this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(cookieSession({
+            name: "cookie-session-name",
+            keys: [COOKIE_ENCRYPTION_KEY as string],
+        }));
+        this.app.use(passport.session());
+        this.app.use(passport.initialize());
+        this.app.use(regenerate);
+        Passport.init();
     }
 
     private initializeRoutes(routes: Routes[]) {
         routes.forEach(route => {
             this.app.use('/', route.router);
         });
+    }
+
+    private initializeView() {
+        this.app.set("view engine", "ejs");
+        this.app.set("views", path.join(path.resolve(), "src", "views"));
     }
 
     private initializeErrorHandling() {

@@ -11,9 +11,16 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "strictPropertyInitialization": false,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
     "lib": [
       "es5",
       "es6"
     ],
+  },
+  "ts-node": {
+    "files": true
   }
 }
